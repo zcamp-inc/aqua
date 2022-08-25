@@ -673,7 +673,7 @@
   dependencies:
     "@chakra-ui/form-control" "2.0.9"
 
-"@chakra-ui/theme-tools@2.0.10":
+"@chakra-ui/theme-tools@2.0.10", "@chakra-ui/theme-tools@^2.0.10":
   version "2.0.10"
   resolved "https://registry.yarnpkg.com/@chakra-ui/theme-tools/-/theme-tools-2.0.10.tgz#25973cc60f67885eafa676e16eb8eb0d99f2bdb1"
   integrity sha512-w9FaQRIjygJUR/viVkGSYKAe9/5ThZEfaGtnqG4dHY/rAnm73rCqUJsUR4xwZAzr8HpXXuJVmwk8cjSElS3yXw==
@@ -2329,6 +2329,11 @@ react-focus-lock@^2.9.1:
     react-clientside-effect "^1.2.6"
     use-callback-ref "^1.3.0"
     use-sidecar "^1.1.2"
+
+react-icons@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.4.0.tgz#a13a8a20c254854e1ec9aecef28a95cdf24ef703"
+  integrity sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

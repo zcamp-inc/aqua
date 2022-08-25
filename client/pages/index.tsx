@@ -17,7 +17,6 @@ const Index = () => {
         }
         return error
     };
-    const handleChange = (e: Event) => setName(e.target.value)
 
     return (
       <Layout>
@@ -25,6 +24,7 @@ const Index = () => {
       initialValues={{ name: '' }}
       onSubmit={(values, actions) => {
         localStorage.setItem('name', name)
+        setName(values.name)
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2))
           actions.setSubmitting(false)
@@ -39,7 +39,7 @@ const Index = () => {
               <Box mt={10}>
               <FormControl isInvalid={form.errors.name && form.touched.name}>
                 <FormLabel>Name</FormLabel>
-                <Input {...field} placeholder='name' onChange={() => setName(name)} />
+                <Input {...field} placeholder='name' />
                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
               </FormControl>
               </Box>
