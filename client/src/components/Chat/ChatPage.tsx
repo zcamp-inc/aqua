@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChatBar from './ChatBar';
 import ChatBody from './ChatBody';
 import ChatFooter from './ChatFooter';
+import { Layout } from '../Layout';
 import { Flex, Button, Text, useColorModeValue, Avatar, Box } from "@chakra-ui/react";
+import { useRouter } from 'next/router';
 
 
 const ChatPage = ({ socket } : {socket: any}) => {
     const bg = useColorModeValue('white', '#2b2b2b');
+    const [page, setPage] = useState<string>("/");
+    const router = useRouter();
 
     return (
             <Flex direction='column' justify='space-between' minW='full'>
@@ -19,15 +23,27 @@ const ChatPage = ({ socket } : {socket: any}) => {
                     </Box>
                 </Flex>
                 <Flex justify='flex-end'>
-                    <Button color='#CB3939' _hover={{ bg: '#FFD0D0'}} borderRadius='md' variant='ghost' px={2}> Leave Chat </Button>
+                    <Button color='#CB3939' _hover={{ bg: '#FFD0D0'}} borderRadius='md' variant='ghost' px={2} onClick={() => router.push('/chat')}> Leave Chat </Button>
                 </Flex>
                 </Flex>                
                 <Flex>
                     <Flex justify='flex-start'>
-                        <ChatBar />
+                        <ChatBar page={page} setPage={setPage} />
                     </Flex>
                     <Flex>
-                        <ChatBody />
+                        {page === '/chatroom-1' ? 
+                       <Flex top={0} pos='absolute'>
+                            <Text  ml='400px' mt={20}>Begin Chat 1</Text>
+                        </Flex>
+                        :
+                        <></>
+                        }
+
+                        {page === '/chatroom-2' ?
+                        <Flex top={0} pos='absolute'>
+                             <Text ml='400px' mt={20}>Begin Chat 2</Text>
+                        </Flex>
+                    : <></>}
                     </Flex>
 
                 </Flex>

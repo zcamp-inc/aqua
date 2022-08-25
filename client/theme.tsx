@@ -24,7 +24,7 @@ const theme = extendTheme({
     styles:{
         global: (props: StyleFunctionProps) => ({
             'html, body': {
-                bgGradient: mode('linear(to-r, purple.500, blue.200)', 'linear(to-r, purple, blue.500)')(props)
+                bgGradient: mode('linear(to-r, purple.500, blue.200)', 'linear(to-r, #0f0f0f, #0f0f0f)')(props)
             }
         }),
     }

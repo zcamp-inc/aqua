@@ -18,11 +18,17 @@ import {
   Button
 } from "@chakra-ui/react";
 import { IoMenu, IoSearchOutline } from "react-icons/io5";
-import { Layout } from "../Layout";
-
-const ChatBar = () => {
+import ChatLink from "./ChatLink";
+const chatrooms = [
+    { label: "Chatroom 1", href: '/chatroom-1'},
+    { label: "Chatroom 2", href: '/chatroom-2'},
+    { label: "Chatroom 3", href: '/chatroom-3'},
+    { label: "Chatroom 4", href: '/chatroom-4'},
+]
+const ChatBar = ({ page, setPage}: {page: any, setPage: any}) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const bg = useColorModeValue('white', '#2b2b2b')
+
   return (
     <Flex
       direction="column"
@@ -57,12 +63,11 @@ const ChatBar = () => {
 
         <TabPanels>
           <TabPanel>
-            <Flex direction="column" px={4}>
-              <Text>Chatroom 1</Text>
-              <Text>Chatroom 2</Text>
-              <Text>Chatroom 3</Text>
-              <Text>Chatroom 4</Text>
-            </Flex>
+            {chatrooms.map((link, i) => (
+                <Flex direction='column' key={i} onClick={() => setPage(link.href)}>
+                    <ChatLink link={link} page={page} />
+                </Flex>
+            ))}
           </TabPanel>
           <TabPanel>
             <p>two!</p>

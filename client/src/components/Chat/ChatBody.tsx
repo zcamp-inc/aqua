@@ -4,7 +4,7 @@ import React from "react"
 const ChatBody = () => {
     return(
         <Flex direction='column' minW='full'>
-           
+
 
         </Flex>
     )
