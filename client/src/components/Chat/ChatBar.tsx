@@ -19,11 +19,12 @@ import {
 } from "@chakra-ui/react";
 import { IoMenu, IoSearchOutline } from "react-icons/io5";
 import ChatLink from "./ChatLink";
-const chatrooms = [
-    { label: "Chatroom 1", href: '/chatroom-1'},
-    { label: "Chatroom 2", href: '/chatroom-2'},
-    { label: "Chatroom 3", href: '/chatroom-3'},
-    { label: "Chatroom 4", href: '/chatroom-4'},
+import ChatHeader from "./ChatHeader";
+export const chatrooms = [
+    { label: "KEK SUPREME", href: '/chatroom-1', imgUrl: 'https://imgur.com/iUO5lDL.png'},
+    { label: "Audio Squad", href: '/chatroom-2', imgUrl: 'https://imgur.com/Xt7EauF.png' },
+    { label: "EIE 500 LEVEL", href: '/chatroom-3', imgUrl: ''},
+    { label: "Covenant University Chaplaincy", href: '/chatroom-4', imgUrl: 'https://i.imgur.com/a07ru9J.png'},
 ]
 const ChatBar = ({ page, setPage}: {page: any, setPage: any}) => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -64,7 +65,7 @@ const ChatBar = ({ page, setPage}: {page: any, setPage: any}) => {
         <TabPanels>
           <TabPanel>
             {chatrooms.map((link, i) => (
-                <Flex direction='column' key={i} onClick={() => setPage(link.href)}>
+                <Flex direction='column' key={i} onClick={() => setPage(link.href)} noOfLines={1}>
                     <ChatLink link={link} page={page} />
                 </Flex>
             ))}
