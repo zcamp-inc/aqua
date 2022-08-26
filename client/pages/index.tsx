@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field } from "formik";
-import {Box, Button, FormLabel, FormControl, Input, FormErrorMessage } from "@chakra-ui/react";
+import {Box, Button, Flex, FormLabel, FormControl, Input, FormErrorMessage } from "@chakra-ui/react";
 import { Layout } from '../src/components/Layout';
 
 const Index = () => {
@@ -23,7 +23,7 @@ const Index = () => {
         <Formik
       initialValues={{ name: '' }}
       onSubmit={(values, actions) => {
-        localStorage.setItem('name', name)
+        localStorage.setItem('name', values.name)
         setName(values.name)
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2))
@@ -33,10 +33,11 @@ const Index = () => {
       }}
     >
       {(props) => (
+        <Box bg='white' mt={10} p={7} borderRadius='lg' h='300px'>
         <Form>
           <Field name='name' validate={validateName}>
             {({ field, form }: { field: any , form: any}) => (
-              <Box mt={10}>
+              <Box >
               <FormControl isInvalid={form.errors.name && form.touched.name}>
                 <FormLabel>Name</FormLabel>
                 <Input {...field} placeholder='name' />
@@ -45,15 +46,20 @@ const Index = () => {
               </Box>
             )}
           </Field>
+          <Flex justify='center'>
           <Button
             mt={4}
-            colorScheme='teal'
+            colorScheme='blue'
             isLoading={props.isSubmitting}
             type='submit'
           >
             Submit
           </Button>
+
+          </Flex>
+
         </Form>
+        </Box>
       )}
     </Formik>
     </Layout>
