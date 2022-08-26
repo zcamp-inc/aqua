@@ -17,6 +17,17 @@ server.use(cors());
 
 socketIO.on('connection', (socket) => {
     console.log(`🤟: ${socket.id} just connected!`);
+    // Listens and logs the message to console
+    // socket.on('message', (data) => {
+    //     console.log(data);
+    // });
+
+    // Sends the message to all the users on the server
+    socket.on('message', (data) => {
+        socketIO.emit('messageResponse', data);
+        console.log(data);
+    })
+
     socket.on('disconnect', () => {
         console.log(`😭: A user disconnected`);
     });
