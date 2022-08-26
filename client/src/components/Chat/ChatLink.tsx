@@ -21,7 +21,7 @@ export default function ChatLink({ link, page}) {
           bg = { page === href ? bg : 'none' }
         >
            <Avatar src={imgUrl} name={label} size='md' /> 
-          <Text fontSize="1.2rem" ml={2} noOfLines={1}>{label}</Text>
+          <Text fontSize={16} fontWeight={600} color='#000a16' ml={2} noOfLines={1}>{label}</Text>
         </Flex>
   );
 }

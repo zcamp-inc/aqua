@@ -16,7 +16,7 @@ const ChatHeader = ({label, members}: {label: any, members: any}) => {
                     </Box>
                 </Flex>
                 <Flex justify='flex-end'>
-                    <Button color='#CB3939' _hover={{ bg: '#FFD0D0'}} borderRadius='md' variant='ghost' px={2} onClick={() => router.push('/chat')}> Leave Chat </Button>
+                    <Button color='#CB3939' _hover={{ bg: '#FFD0D0'}} borderRadius='md' variant='ghost' px={2} onClick={() => { localStorage.removeItem('username'); router.push('/')}}> Leave Chat </Button>
                 </Flex>
                 </Flex> 
     )

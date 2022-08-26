@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChatBar from './ChatBar';
 import ChatBody from './ChatBody';
 import ChatHeader from './ChatHeader';
@@ -11,19 +11,28 @@ import { useRouter } from 'next/router';
 const ChatPage = ({ socket } : {socket: any}) => {
     const [page, setPage] = useState<string>("/");
     const router = useRouter();
+    const [ messages, setMessages ] = useState([]) as any[];
+
+    useEffect(() => {
+        socket.on('messageResponse', (data: any) => setMessages([...messages, data]));
+    }, [socket, messages]);
 
     return (
-            <Flex direction='column' justify='space-between' minW='full'>               
-                <Flex minW='full'>
+            <Flex direction='column' justify='space-between' w='full'>               
+                <Flex>
                     <Flex justify='flex-start'>
                         <ChatBar page={page} setPage={setPage} />
                     </Flex>
-                    <Flex minW='full'>
+                    <Flex w='full'>
                         {page === '/chatroom-1' ? 
-                        <Flex direction='column' minW ='full'>
+                        <Flex direction='column' w ='full'>
                             <ChatHeader label={'KEK SUPREME'} members={5} />
-                       <Flex top={0} pos='absolute'>
-                            <Text  ml='400px' mt={20}>Begin Chat 1</Text>
+                            
+                       <Flex ml='350px' py={6} justify='center' overflow='hidden'>
+                            <ChatBody messages={messages} />
+                        </Flex>
+                        <Flex justify='center' align='center'>
+                        <ChatFooter socket={socket} />
                         </Flex>
                         </Flex>
                         :
@@ -53,6 +62,7 @@ const ChatPage = ({ socket } : {socket: any}) => {
                         <ChatHeader label={'Covenant University Chaplaincy'} members={'2,519'} />
                    <Flex top={0} pos='absolute'>
                         <Text  ml='400px' mt={20}>Begin Chat 4</Text>
+                        <ChatBody />
                     </Flex>
                     </Flex>
                     : <></>}
