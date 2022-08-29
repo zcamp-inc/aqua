@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ChatBar from './ChatBar';
 import ChatBody from './ChatBody';
 import ChatHeader from './ChatHeader';
@@ -12,10 +12,21 @@ const ChatPage = ({ socket } : {socket: any}) => {
     const [page, setPage] = useState<string>("/");
     const router = useRouter();
     const [ messages, setMessages ] = useState([]) as any[];
+    const [typingStatus, setTypingStatus] = useState('');
+    const lastMessageRef = useRef<null | HTMLDivElement>(null);
 
     useEffect(() => {
         socket.on('messageResponse', (data: any) => setMessages([...messages, data]));
     }, [socket, messages]);
+
+    useEffect(() => {
+        // To scroll to the bottom every time there's a new message
+        lastMessageRef.current?.scrollIntoView({ behavior: 'smooth'});
+    }, [messages])
+
+    useEffect(() => {
+        socket.on('typingResponse', (data: any) => setTypingStatus(data));
+    }, [socket]);
 
     return (
             <Flex direction='column' justify='space-between' w='full'>               
@@ -29,10 +40,10 @@ const ChatPage = ({ socket } : {socket: any}) => {
                             <ChatHeader label={'KEK SUPREME'} members={5} />
                             
                        <Flex ml='350px' py={6} justify='center' overflow='hidden'>
-                            <ChatBody messages={messages} />
+                            <ChatBody messages={messages} lastMessageRef={lastMessageRef}  />
                         </Flex>
                         <Flex justify='center' align='center'>
-                        <ChatFooter socket={socket} />
+                        <ChatFooter socket={socket} typing={typingStatus} />
                         </Flex>
                         </Flex>
                         :

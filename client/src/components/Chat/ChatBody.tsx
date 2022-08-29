@@ -1,7 +1,7 @@
 import { Flex, Text, VStack, Box, Container } from "@chakra-ui/react";
 import React from "react";
 
-const ChatBody = ({messages}: any) => {
+const ChatBody = ({messages, lastMessageRef}: any) => {
   return (
       <Flex direction='column' w="700px" maxH='400px'  overflowY='scroll' mb={2}  boxSizing="content-box" css={{
         '&:: -webkit-scrollbar': {
@@ -46,7 +46,7 @@ const ChatBody = ({messages}: any) => {
 
         )}
 
-        
+      <Flex ref={lastMessageRef} />
       </Flex>
   );
 };

@@ -12,24 +12,28 @@ import { Formik, Form, Field } from "formik";
 import React, { useState } from "react";
 
 interface ChatFooterProps{
-    socket: any
+    socket: any,
+    typing: any
 }
-const ChatFooter: React.FC<ChatFooterProps> = ({socket}) => {
+const ChatFooter: React.FC<ChatFooterProps> = ({socket, typing}) => {
   const [message, setMessage] = useState("");
+  const handleTyping = () => 
+    socket.emit('typing', `${localStorage.getItem('name')} is typing...`);
+
   return (
     <Flex
       pos="fixed"
       bottom={0}
-      ml={300}
+      ml={270}
       h={14}
       align="center"
-      justify="space-between"
+      justify="start"
       w="700px"
     >
-        <Text>Someone is typing...</Text>
       <Flex justify="flex-start" align="center">
+          <Text mr={3}>{typing}</Text>
         <Box>
-          <Text ml={2} fontSize={30} fontWeight={600}>
+          <Text fontSize={30} fontWeight={600}>
             🙂
           </Text>
         </Box>
@@ -65,6 +69,7 @@ const ChatFooter: React.FC<ChatFooterProps> = ({socket}) => {
                       bg="white"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
+                      onKeyDownCapture={handleTyping}
                     />
                     <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                   </FormControl>
