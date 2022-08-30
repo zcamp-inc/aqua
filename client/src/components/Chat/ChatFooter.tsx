@@ -20,18 +20,28 @@ const ChatFooter: React.FC<ChatFooterProps> = ({socket, typing}) => {
   const handleTyping = () => 
     socket.emit('typing', `${localStorage.getItem('name')} is typing...`);
 
+    var now = new Date();
+    var sent = now.getTime();
+
   return (
-    <Flex
-      pos="fixed"
-      bottom={0}
-      ml={270}
-      h={14}
-      align="center"
-      justify="start"
+    <Flex 
+    direction='column'
+    pos="fixed"
+    bottom={0}
+    ml={480}
+    h={14}
+    align="center"
+    justify="center"
+    >
+      <Flex justify='flex-start' ml={-480}>
+        <Text mt={-6} mr={3}>{typing}</Text>
+      </Flex>
+      <Flex
+     
       w="700px"
     >
-      <Flex justify="flex-start" align="center">
-          <Text mr={3}>{typing}</Text>
+          
+      <Flex justify="center" align="center">
         <Box>
           <Text fontSize={30} fontWeight={600}>
             🙂
@@ -48,7 +58,8 @@ const ChatFooter: React.FC<ChatFooterProps> = ({socket, typing}) => {
                 text: message,
                 name: localStorage.getItem('name'),
                 id: `${socket.id}-${Math.random()}`,
-                socketID: socket.id
+                socketID: socket.id,
+                timeStamp: now.getTime()
             });
           }
           setMessage("");
@@ -91,6 +102,7 @@ const ChatFooter: React.FC<ChatFooterProps> = ({socket, typing}) => {
           </Form>
         )}
       </Formik>
+    </Flex>
     </Flex>
   );
 };

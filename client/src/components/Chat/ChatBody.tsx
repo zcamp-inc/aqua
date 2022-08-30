@@ -2,6 +2,8 @@ import { Flex, Text, VStack, Box, Container } from "@chakra-ui/react";
 import React from "react";
 
 const ChatBody = ({messages, lastMessageRef}: any) => {
+  var d = new Date(messages.timeStamp);
+  var time = d.getTime();
   return (
       <Flex direction='column' w="700px" maxH='400px'  overflowY='scroll' mb={2}  boxSizing="content-box" css={{
         '&:: -webkit-scrollbar': {
@@ -23,8 +25,10 @@ const ChatBody = ({messages, lastMessageRef}: any) => {
                 ml='auto'
                 mb={2}
               >
-                <Text mb={2}>You</Text>
-                <Text>{message.text}</Text>
+                <Flex justify='space-between'>
+                  <Text>{message.text}</Text>
+                  <Text fontSize={11} mt={3} ml={2}>{messages.timeStamp}</Text>
+                </Flex>
               </Box>
             ):(
                 <Box
